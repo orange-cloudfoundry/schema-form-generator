@@ -7,7 +7,8 @@ branches:
     - develop
 
 before_script:
-  - npm install -g @angular/cli
+  - yarn global add @angular/cli
+  - ng set --global packageManager=yarn
 
 script:
   - ng build 
