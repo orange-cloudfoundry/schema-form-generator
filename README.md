@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/hamzahamidi/schema-form-generator.svg?branch=develop)](https://travis-ci.org/hamzahamidi/schema-form-generator)
+[![Build Status](https://travis-ci.org/orange-cloudfoundry/schema-form-generator.svg?branch=develop)](https://travis-ci.org/orange-cloudfoundry/schema-form-generator)
 # Json schema form generator Sample with Angular 
 
 
