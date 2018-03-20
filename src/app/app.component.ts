@@ -1,5 +1,4 @@
 import { Component, Inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 declare let JSONEditor;
 @Component({
@@ -14,7 +13,9 @@ export class AppComponent {
   openDialogServiceParams(): void {
     const dialogRef = this.dialog.open(AppServiceParamsComponent, {
       height: '600px',
-      width: '600px'
+      width: '600px',
+      disableClose: true
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -36,7 +37,7 @@ export class AppComponent {
   <span *ngIf="!generatedFormOrJsonEditor">Switch to Generated Forms</span>
   </button>
   </mat-grid-tile>
-  </mat-grid-list> 
+  </mat-grid-list>
   </div>
   <div [hidden]="generatedFormOrJsonEditor">
   <div #jsoneditor style="height: 400px;"></div>
@@ -50,10 +51,13 @@ export class AppComponent {
   loadExternalAssets="true"
   [schema]="schema"
   [framework]="selectedFramework"
+  (onChanges)="onChange($event)"
   (onSubmit)="submit($event)">
   </json-schema-form>
   </mat-card>
-  </div>`
+  </div>
+  <button style="margin:5px; float: right;" mat-raised-button color="warn" (click)="close()"> Cancel</button>
+  `
 })
 export class AppServiceParamsComponent implements AfterViewInit {
   generatedFormOrJsonEditor: boolean;
@@ -166,13 +170,23 @@ export class AppServiceParamsComponent implements AfterViewInit {
   submit($event) {
     console.log($event);
     alert(JSON.stringify($event, null, 2));
-    this.dialogRef.close();
+    this.close();
   }
 
   done() {
     const output = this.editor.get();
     alert(JSON.stringify(output, null, 2));
     console.log(output);
+    this.close();
+  }
+
+  onChange(json) {
+    if (this.editor) {
+      this.editor.set(json);
+    }
+  }
+
+  close() {
     this.dialogRef.close();
   }
 }
