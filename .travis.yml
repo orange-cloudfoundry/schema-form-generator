@@ -20,7 +20,7 @@ after_success:
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure. Currently token from hamzahamidi gh account
   keep-history: false
   on:
     branch: develop
